@@ -1,0 +1,38 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li>
+            <p style="color:#fff">::Administrador de Contenidos::</p>            
+        </li>           
+        <li>
+            <a href="{#base_url()#}admin/auth"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
+        </li>			
+
+        {#foreach from=$listado item=menu#} 
+            {#if $menu->tipo==0#}
+		{#if $menu->id_menu==2#}
+		    <li>
+		        <a href="{#base_url()#}{#$menu->link#}/index/{#$menu->id_menu#}"><i class="{#$menu->class#}"></i> {#$menu->name#}</a>
+		    </li>        
+		{#else#}
+ <li>
+		        <a href="{#base_url()#}admin/{#$menu->link#}/index/{#$menu->id_menu#}"><i class="{#$menu->class#}"></i> {#$menu->name#}</a>
+		    </li>        
+
+		{#/if#}
+
+            {#elseif $menu->tipo==1#}
+            <li><a href="javascript:;" data-toggle="collapse" data-target="#demo{#$menu->id_menu#}"><i class="{#$menu->class#}"></i> {#$menu->name#} <i class="fa fa-fw fa-caret-down"></i></a>
+			<ul id='demo{#$menu->id_menu#}'  {#if isset($idmenu) && ($idmenu==$menu->id_menu)#}class=''{#else#}class='collapse'{#/if#}>
+			{#foreach from=$listado item=lista#}
+                {#if $menu->id_menu == $lista->tipo #}
+                <li>
+                <a href="{#base_url()#}admin/{#$lista->link#}/index/{#$menu->id_menu#}"><i class="{#$lista->class#}"></i> {#$lista->name#}</a>
+                </li>
+                {#/if #}
+            {#/foreach#}
+			</ul>
+            </li>
+            {#/if #}
+        {#/foreach#} 
+    </ul>
+</div>

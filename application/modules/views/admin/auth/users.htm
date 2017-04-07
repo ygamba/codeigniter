@@ -1,0 +1,47 @@
+           {#include file="admin/tema/header.htm"#}
+  
+
+<table class="table table-bordered" cellpadding=0 cellspacing=10>
+	<tr>
+		<th> {#lang('index_fname_th')#}</th>
+		<th> {#lang('index_lname_th')#}</th>
+		<th> {#lang('index_email_th')#}</th>
+		<th> {#lang('index_groups_th')#}</th>
+		<th> {#lang('index_status_th')#}</th>
+		<th> {#lang('index_action_th')#}</th>
+	</tr>
+	{#foreach from=$users item=$user key=id#}
+		<tr>
+            <td>{#$user->first_name#}</td>
+            <td>{#$user->last_name#}</td>
+            <td>{#$user->email#}</td>
+            
+           
+  	<td>
+      {#foreach from=$user->groups item=$group#}
+        <a href="{#base_url()#}admin/auth/edit_group/{#$group->id#}/{#$idmenu#}">{#$group->name#} </a> <br />
+      {#/foreach#}
+    </td>
+                <td>{#if $user->active#}                         
+                            <a href="{#base_url()#}admin/auth/deactivate/{#$user->id#}/{#$idmenu#}" class="btn btn-success">{#lang('index_active_link')#} </a> <br />     
+                        {#else#}
+                            <a href="{#base_url()#}admin/auth/activate/{#$user->id#}/{#$idmenu#}" class="btn btn-danger">{#lang('index_inactive_link')#} </a> <br />                                 
+                        {#/if#}
+                 <td>
+
+                      {#if strpos($user->email,'dane.gov.co')#} 
+                         <a href="#" class="btn btn-warning disabled ">Edit</a> <br />
+                      {#else#}
+                        <a href="{#base_url()#}admin/auth/edit_user/{#$user->id#}/{#$idmenu#}" class="btn btn-warning">Edit</a> <br />
+                      {#/if#}
+
+                                                         
+                        
+                    </td>
+		</tr>
+	{#/foreach#}
+</table>
+
+<p><a href="{#base_url()#}admin/auth/create_user/{#$idmenu#}" class="btn btn-info">{#lang('index_create_user_link')#}</a> | <a href="{#base_url()#}admin/auth/create_group/{#$idmenu#}" class="btn btn-primary">{#lang('index_create_group_link')#}</a></p>
+
+           {#include file="admin/tema/footer.htm"#}

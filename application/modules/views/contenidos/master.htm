@@ -1,0 +1,35 @@
+{#include file="admin/tema/header.htm"#}
+<script>
+    $(function () {
+      $('.remove-item').click(function () {
+        $("#delConfirmBtn").attr("href", $(this).attr("href"));
+        $('#myModalDel').modal('show');
+        return false;
+      });
+    });
+</script>
+<table class="table table-bordered" cellpadding=0 cellspacing=10>
+	<tr>
+		<th> Titulo</th>
+               
+                <th> Fecha Creación</th> 
+                <th class="tit-opcion-admin" colspan="2"> <a href="{#$linkCrear#}" class="btn btn-info nuevo-item" >Crear Nuevo Contenido</a></th>
+	</tr>
+	{#foreach from=$data item=$categoria#}
+	    <tr>
+            <td>{#$categoria->titulo#} </td>
+            
+            <td>{#$categoria->fechac|date_format:"%A, %B %e, %Y"#}</td>
+                      
+            <td class="tit-opcion-admin" >
+                <a href="{#$linkEditar#}/{#$categoria->id_contenido#}" class="btn btn-warning">Editar</a> <br />                        
+            </td>
+             <td class="tit-opcion-admin" >
+                <a href="{#$linkEliminar#}/{#$categoria->id_contenido#}" class="remove-item btn btn-danger">Eliminar</a> <br />                        
+            </td>
+            </tr>
+	{#/foreach#}
+</table>
+{#$links#}
+{#include file="admin/tema/modal_delitem.htm"#}
+{#include file="admin/tema/footer.htm"#}

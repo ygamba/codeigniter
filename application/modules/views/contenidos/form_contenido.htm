@@ -1,0 +1,58 @@
+{#include file="admin/tema/header.htm"#}
+
+
+
+<form action="" id="frm_formato" name="frm_formato" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+    <div class='col-md-12'>
+        <div class="form-group">
+            <label>Titulo del del curso</label><br />
+            <input type="text" name="titulo" id="titulo" class ="form-control" value='{#$data->titulo#}' required />
+            <div style="color: #F60808">{#form_error('titulo')#}</div>
+        </div>
+    </div>
+    <div class='col-md-12'>
+        <div class="form-group">
+            <label>Contenido Padre</label><br />
+            <select name="padre" id="padre" class ='form-control'>
+            <option value="">Selecciona Uno...</option>
+            {#html_options options=$padres selected=$data->id_padre#}
+            </select>
+        </div>
+        <div style="color: #F60808">{#form_error('padre')#}</div>
+    </div>
+   <div class='col-md-12'>
+        <div class="form-group">
+            <label>Descripción del Contenido</label><br />
+            <textarea name="descripcion" id="descripcion" class ="form-control"  required/>{#$data->descripcion#}</textarea>
+        </div>
+       <div style="color: #F60808">{#form_error('descripcion')#}</div>
+    </div>
+   
+  
+   
+    <div class='col-md-6'>
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" value="Enviar" name="enviar">
+        </div>
+    </div>
+    <input type="hidden" name="contenido" id="contenido" value="{#$data->id_contenido#}">
+</div>
+</form>
+
+{#include file="admin/tema/footer.htm"#}
+
+<script>
+   //<![CDATA[
+    CKEDITOR.replace('descripcion', {"toolbar": "Full", 
+"language": "es", 
+"filebrowserBrowseUrl": "{#base_url()#}lib/ckfinder/ckfinder.html", 
+"filebrowserImageBrowseUrl": "{#base_url()#}libs/ckfinder/ckfinder.html?type=Images", 
+"filebrowserFlashBrowseUrl": "{#base_url()#}libs/ckfinder/ckfinder.html?type=Flash", 
+"filebrowserUploadUrl": "{#base_url()#}libs/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files", 
+"filebrowserImageUploadUrl": "{#base_url()#}libs/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images", 
+"filebrowserFlashUploadUrl": "{#base_url()#}libs/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash"});
+
+//]]>
+</script>
