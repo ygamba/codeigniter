@@ -6,7 +6,7 @@ class Revista_model extends CI_Model {
 
   function total_registros(){
 		
-		$cadena_sql = "SELECT
+		$cadena_sql = "SELECT                   id_contenido,
 							titulo,
 							descripcion
 						FROM

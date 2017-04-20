@@ -28,7 +28,7 @@
     
     
     
-    <script src="{#base_url()#}assets/admin/calendar/lib/jquery.min.js"></script>
+     <script src="{#base_url()#}assets/datatables/js/jquery.js"></script>    
     <script src="{#base_url()#}assets/admin/js/moment.js"></script>
     <script src="{#base_url()#}assets/admin/js/bootstrap-datetimepicker.min.js"></script>
     <script src="{#base_url()#}assets/admin/js/jquery-ui-1.10.4.custom.min.js"></script>	
@@ -59,13 +59,39 @@
                     "dataSrc": ""
 				},
 				"columns":[
-					{"data":"titulo"},
-					{"data":"descripcion"},
-                                        {"defaultContent":"<button type='button' class='editar btn btn-primary' onclick=(location.href='http://google.com')><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}
+                                        {"data":["id_contenido"]},
+					{"data":["titulo"]},
+					{"data":["descripcion"]},
+                                        {"defaultContent":"<button type='button' class='editar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}
 				],
-                                "language":idioma_español
+                                "language":idioma_español,
+                       
 			});
+                        
+                        $('#dt_cliente tfoot th').each( function () {
+                        var title = $(this).text();
+                        $(this).html( '<input type="text" placeholder="Busqueda '+title+'" />' );
+                    } );
+
+                    table.columns().every( function () {
+                        var that = this;
+
+                        $( 'input', this.footer() ).on( 'keyup change', function () {   
+                          
+                            
+                            if ( that.search() !== this.value ) {
+                                
+                                that
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        } );
+                    } );    
+    
+     $('#dt_cliente tfoot tr').appendTo('#dt_cliente thead');
 		}
+                
+                
                 
                 var idioma_español= {
                       "sProcessing":     "Procesando...",
@@ -92,6 +118,13 @@
                         }
                     
                 }
+
+ 
+
+    // Apply the search
+    
+
+
 
 	</script>
     
@@ -146,13 +179,23 @@
 			<div class="table-responsive col-sm-12">		
 				<table id="dt_cliente" class="table table-bordered table-hover" cellspacing="0" width="100%">
 					<thead>
-						<tr>								
+						<tr>			
+                                                        <th>ID</th>
 							<th>Titulo</th>
 							<th>Descripcion</th>
 							
 							<th>Editar | Eliminar</th>											
 						</tr>
 					</thead>					
+                                        
+                                        <tfoot>
+                                                <tr>
+                                                        <th>ID</th>
+							<th>Titulo</th>
+							<th>Descripcion</th>
+                
+                                                </tr>
+                                        </tfoot>
 				</table>
 			</div>			
 		</div>		

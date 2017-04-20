@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-04-03 19:34:34
+/* Smarty version 3.1.30, created on 2017-04-20 08:17:51
   from "/var/www/codeigniter/application/modules/views/revista/master.htm" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58e2ea1a066cf3_85891985',
+  'unifunc' => 'content_58f8b4ff903181_55708987',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '77e9cc529a018cbb47e1d058854ab575e6d55b44' => 
     array (
       0 => '/var/www/codeigniter/application/modules/views/revista/master.htm',
-      1 => 1491266071,
+      1 => 1492670819,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58e2ea1a066cf3_85891985 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58f8b4ff903181_55708987 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,10 +60,10 @@ assets/datatables/extensions/Buttons/css/buttons.bootstrap.min.css" rel="stylesh
     
     
     
-    <?php echo '<script'; ?>
+     <?php echo '<script'; ?>
  src="<?php echo base_url();?>
-assets/admin/calendar/lib/jquery.min.js"><?php echo '</script'; ?>
->
+assets/datatables/js/jquery.js"><?php echo '</script'; ?>
+>    
     <?php echo '<script'; ?>
  src="<?php echo base_url();?>
 assets/admin/js/moment.js"><?php echo '</script'; ?>
@@ -132,13 +132,39 @@ assets/js/additional-methods.min.js"><?php echo '</script'; ?>
                     "dataSrc": ""
 				},
 				"columns":[
-					{"data":"titulo"},
-					{"data":"descripcion"},
-                                        {"defaultContent":"<button type='button' class='editar btn btn-primary' onclick=(location.href='http://google.com')><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}
+                                        {"data":["id_contenido"]},
+					{"data":["titulo"]},
+					{"data":["descripcion"]},
+                                        {"defaultContent":"<button type='button' class='editar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}
 				],
-                                "language":idioma_español
+                                "language":idioma_español,
+                       
 			});
+                        
+                        $('#dt_cliente tfoot th').each( function () {
+                        var title = $(this).text();
+                        $(this).html( '<input type="text" placeholder="Busqueda '+title+'" />' );
+                    } );
+
+                    table.columns().every( function () {
+                        var that = this;
+
+                        $( 'input', this.footer() ).on( 'keyup change', function () {   
+                          
+                            
+                            if ( that.search() !== this.value ) {
+                                
+                                that
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        } );
+                    } );    
+    
+     $('#dt_cliente tfoot tr').appendTo('#dt_cliente thead');
 		}
+                
+                
                 
                 var idioma_español= {
                       "sProcessing":     "Procesando...",
@@ -165,6 +191,13 @@ assets/js/additional-methods.min.js"><?php echo '</script'; ?>
                         }
                     
                 }
+
+ 
+
+    // Apply the search
+    
+
+
 
 	<?php echo '</script'; ?>
 >
@@ -220,13 +253,23 @@ assets/js/additional-methods.min.js"><?php echo '</script'; ?>
 			<div class="table-responsive col-sm-12">		
 				<table id="dt_cliente" class="table table-bordered table-hover" cellspacing="0" width="100%">
 					<thead>
-						<tr>								
+						<tr>			
+                                                        <th>ID</th>
 							<th>Titulo</th>
 							<th>Descripcion</th>
 							
 							<th>Editar | Eliminar</th>											
 						</tr>
 					</thead>					
+                                        
+                                        <tfoot>
+                                                <tr>
+                                                        <th>ID</th>
+							<th>Titulo</th>
+							<th>Descripcion</th>
+                
+                                                </tr>
+                                        </tfoot>
 				</table>
 			</div>			
 		</div>		

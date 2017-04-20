@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-04-01 12:40:32
+/* Smarty version 3.1.30, created on 2017-04-18 23:58:14
   from "/var/www/codeigniter/application/modules/views/home/home.htm" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58dfe61080cd01_46963422',
+  'unifunc' => 'content_58f6ee669cb4d8_71537509',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd0753683bb5a028a4523415500b60309716997ff' => 
     array (
       0 => '/var/www/codeigniter/application/modules/views/home/home.htm',
-      1 => 1490930755,
+      1 => 1492577886,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58dfe61080cd01_46963422 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58f6ee669cb4d8_71537509 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -121,6 +121,9 @@ userfiles/images/construccion.gif">
 revista">revista</a>
 
 <br><br><br><br>
+
+<p>Version <?php echo CI_VERSION;?>
+</p>
 
 </body>
 </html>

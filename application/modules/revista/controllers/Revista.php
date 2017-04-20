@@ -33,6 +33,9 @@ class Revista extends CI_Controller {
         
             $registros = $this->Revista_model->total_registros();
             
+            
+            
+            
             $data= json_encode($registros);
          
             echo $data;           
